@@ -1,24 +1,31 @@
-"""
-Punto de entrada minimal para el proyecto de flashcards.
-
-Ejecución: python src/main.py
-"""
-import sys
-from pathlib import Path
-
-from src.csv_loader import load_words
-
 def main():
-    import random
-    base = Path(__file__).resolve().parents[1]
-    csv_path = base / "data" / "words.csv"
-    words = load_words(str(csv_path))
-    print(f"Cargadas {len(words)} palabras desde {csv_path}")
-    if words:
-        word = random.choice(words)
-        print(f"Palabra aleatoria: {word['espanol']} - {word['ingles']}")
-    else:
-        print("No se encontraron palabras en el archivo CSV.")
+    app = QApplication(sys.argv)
+    window = FlashcardApp()
+    window.show()
+    sys.exit(app.exec_())
 
+"""
+Minimal entry point for the flashcard project.
+
+Run: python src/main.py
+"""
+
+
+
+import sys
+import os
+from PyQt5.QtWidgets import QApplication
+sys.path.append(os.path.dirname(__file__))
+from ui import FlashcardApp
+
+
+# Main function to launch only the PyQt UI
+def main():
+    app = QApplication(sys.argv)
+    window = FlashcardApp()
+    window.show()
+    sys.exit(app.exec_())
+
+# Run the main function if this file is executed directly
 if __name__ == "__main__":
     main()
