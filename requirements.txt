@@ -1,0 +1,3 @@
+# requirements for the project
+# Uncomment the GUI toolkit you want to use
+# PyQt6>=6.5
