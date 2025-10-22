@@ -9,10 +9,16 @@ from pathlib import Path
 from src.csv_loader import load_words
 
 def main():
+    import random
     base = Path(__file__).resolve().parents[1]
     csv_path = base / "data" / "words.csv"
     words = load_words(str(csv_path))
     print(f"Cargadas {len(words)} palabras desde {csv_path}")
+    if words:
+        word = random.choice(words)
+        print(f"Palabra aleatoria: {word['espanol']} - {word['ingles']}")
+    else:
+        print("No se encontraron palabras en el archivo CSV.")
 
 if __name__ == "__main__":
     main()

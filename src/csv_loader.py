@@ -1,14 +1,22 @@
-from pathlib import Path
 import csv
+import random
 
-def load_words(csv_path: str):
-    """Carga un CSV con columnas 'front' y 'back' y devuelve una lista de dicts.
+file = "data/words.csv"
 
-    Si el archivo no existe devuelve lista vacía.
-    """
-    path = Path(csv_path)
-    if not path.exists():
-        return []
-    with path.open(encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        return [row for row in reader]
+def loader_word():
+    with open(file, encoding="utf-8") as f:
+        reader = csv.reader(f)
+        rows = list(reader)
+    palabras = [row for row in rows[1:] if row]
+    palabra = random.choice(palabras)
+    pregunta = palabra[0]
+    respuesta = palabra[1]
+    user_input = input(f"....: {pregunta}\n> ")
+    print(f"x: {pregunta}  y: {user_input}")
+    if user_input.strip().lower() == respuesta.strip().lower():
+        print("ok")
+    else:
+        print(f"not OK: {respuesta}")
+
+if __name__ == "__main__":
+    loader_word()
